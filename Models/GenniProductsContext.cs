@@ -16,8 +16,6 @@ namespace GenniiProducts.Models
                 var config = new ConfigurationBuilder()
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                 .AddJsonFile("appsettings.json").Build();
-
-
                 var section = config.GetSection("ConnectionStrings");
                 string connectionString = section["DefaultConnection"];
                 optionsBuilder.UseSqlServer(connectionString);
@@ -27,7 +25,5 @@ namespace GenniiProducts.Models
         public DbSet<Product> Products { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
-
-
     }
 }
