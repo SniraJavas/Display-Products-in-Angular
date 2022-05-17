@@ -1,0 +1,30 @@
+<h2>Product List</h2>
+
+<div>
+  <button type="button" class="create-product" (click)="add()">
+    New Product
+  </button>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{modalTittle}}  </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<div class="modal-body">
+  <div>
+    <div class="form-group">
+    </div>
+</div>
+</div>
+<div  class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="modal.close('Continue click')">Continue</button>
+</div>
+</ng-template>
+<div class="products">
+  <ul  *ngFor="let p of products;index as i;" class="product-fields">
+    <li><p >{{i+1}} {{p.Name}}</p></li>
+    <li><a (click)="openView(content,p)">View</a><a  (click)="openEdit(content,p)" >Edit</a><a (click)="openDelete(content,p)">Delete</a></li>
+  </ul>
+</div>

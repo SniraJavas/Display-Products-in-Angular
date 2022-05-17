@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-const endpoint = 'https://localhost:44385/api/';
+const endpoint = 'https://localhost:7205/api/';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
