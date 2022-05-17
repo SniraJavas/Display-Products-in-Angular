@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Product, ProductsService } from 'src/app/services/product/product.service';
@@ -8,6 +8,7 @@ import { Product, ProductsService } from 'src/app/services/product/product.servi
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
+
 export class ProductListComponent implements OnInit {
 
   
@@ -15,7 +16,7 @@ export class ProductListComponent implements OnInit {
   selectedProduct!: Product;
   closeResult = '';
   isEditable = false;
- 
+  @Output() productAdded = new EventEmitter();
   constructor(
     private modalService: NgbModal,
     private route: ActivatedRoute,
@@ -69,6 +70,10 @@ export class ProductListComponent implements OnInit {
     }, (reason: any) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+  }
+
+  BuyProduct(content: any,Product : Product){
+    this.productAdded.emit(Product);
   }
   
   openDelete(content: any, Product : Product) {

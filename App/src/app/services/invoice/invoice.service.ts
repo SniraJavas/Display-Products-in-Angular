@@ -51,12 +51,13 @@ export class InvoiceService {
     );
   }
 
-  addInvoice (Invoice: {
+  addInvoice (Invoice:{
     id: number,
-    name: string,
-    surname: string,
-    email: string,
-    role: number
+    user: User,
+    userId : number,
+    products: Product[],
+    created: String,
+    total: number
 }): Observable<any> {
     console.log("Invoice to Add", Invoice);
     return this.http.post<any>(endpoint + 'Invoices', JSON.stringify(Invoice), httpOptions).pipe(

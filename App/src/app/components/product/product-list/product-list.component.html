@@ -28,11 +28,11 @@
 </div>
 </ng-template>
 <div>
-  <div class="products">
+  <div class="products c0l-6">
     <ul  *ngFor="let p of products;index as i;" class="product-fields">
       <li><p >{{i+1}} {{p.name}}</p></li>
       <li><p >R{{p.price}}</p></li>
-      <li><a (click)="openView(content,p)">View</a><a  (click)="openEdit(content,p)" >Edit</a><a (click)="openDelete(content,p)">Delete</a></li>
+      <li><a (click)="openView(content,p)">View</a><a  (click)="openEdit(content,p)" >Edit</a><a (click)="openDelete(content,p)">Delete</a><a (click)="BuyProduct(content,p)">+</a></li>
     </ul>
   </div>
   <div>
