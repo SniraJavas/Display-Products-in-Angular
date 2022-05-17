@@ -22,11 +22,11 @@ export class ProductListComponent implements OnInit {
     public rest: ProductsService,
     private router: Router) { }
 
-    @Input() productData: Product = { Id: 0,
-      Name: '',
-      Price: 0,
-      Quantity: 0,
-      Stock: 0};
+    @Input() productData: Product = { id: 0,
+      name: '',
+      price: 0,
+      quantity: 0,
+      stock: 0};
     
       @Input() modalTittle: string = '';
   ngOnInit(): void {
@@ -76,7 +76,7 @@ export class ProductListComponent implements OnInit {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result: any) => {
     console.log("del ",result);
     if(result == 'Continue click'){
-      this.delete(this.productData.Id);
+      this.delete(this.productData.id);
     }
     }, (reason: any) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -106,7 +106,7 @@ export class ProductListComponent implements OnInit {
   }
 
   updateProduct() {
-    this.rest.updateProduct(this.productData.Id, this.productData).subscribe((result) => {
+    this.rest.updateProduct(this.productData.id, this.productData).subscribe((result) => {
       this.router.navigate(['/product-details/'+result._id]);
     }, (err) => {
       console.log(err);

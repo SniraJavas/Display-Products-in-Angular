@@ -14,11 +14,11 @@ const httpOptions = {
 };
 
 export interface Product {
-    Id: number,
-    Name: string,
-    Price: number,
-    Quantity: number,
-    Stock: number
+    id: number,
+    name: string,
+    price: number,
+    quantity: number,
+    stock: number
 }
 
 @Injectable({

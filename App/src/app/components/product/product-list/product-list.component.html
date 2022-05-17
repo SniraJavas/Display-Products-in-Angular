@@ -1,10 +1,6 @@
 <h2>Product List</h2>
 
-<div>
-  <button type="button" class="create-product" (click)="add()">
-    New Product
-  </button>
-</div>
+
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">{{modalTittle}}  </h4>
@@ -24,7 +20,12 @@
 </ng-template>
 <div class="products">
   <ul  *ngFor="let p of products;index as i;" class="product-fields">
-    <li><p >{{i+1}} {{p.Name}}</p></li>
+    <li><p >{{i+1}} {{p.name}}</p></li>
     <li><a (click)="openView(content,p)">View</a><a  (click)="openEdit(content,p)" >Edit</a><a (click)="openDelete(content,p)">Delete</a></li>
   </ul>
 </div>
+<div>
+    <button type="button" class="create-product" (click)="add()">
+        <i class="fa fa-plus" aria-hidden="true">Add New Product</i>
+    </button>
+  </div>

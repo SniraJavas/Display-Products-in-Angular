@@ -12,6 +12,7 @@ import { ProductDetailsComponent } from './components/product/product-details/pr
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductListComponent } from './components/product/product-list/product-list.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ProductListComponent } from './components/product/product-list/product-
     MDBBootstrapModule.forRoot(),
     NgbModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule 
   ],
   providers: [AppRoutingModule],
   bootstrap: [AppComponent],

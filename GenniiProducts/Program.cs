@@ -20,11 +20,22 @@ var section = config.GetSection("ConnectionStrings");
 string connectionStr = section["DefaultConnection"];
 
 builder.Services.AddDbContext<GenniProductsContext>(options => options.UseSqlServer(connectionStr));
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+    builder => builder.AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseCors(x => x
+               .AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader());
     app.UseSwagger();
     app.UseSwaggerUI();
 }
