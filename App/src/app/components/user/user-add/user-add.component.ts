@@ -23,7 +23,7 @@ export class UserAddComponent implements OnInit {
   addUser() {
     
     this.rest.addUser(this.UserData).subscribe((result: { UserID: number; }) => {
-      this.router.navigate(['/User-details/'+result.UserID]);
+      this.router.navigate(['/User-list/'+result.UserID]);
     }, (err: any) => {
       console.log(err);
     });

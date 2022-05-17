@@ -42,7 +42,7 @@ export class UserListComponent implements OnInit {
   }
 
   add(): void {
-    this.router.navigate(['/User-add']);
+    this.router.navigate(['/user-add']);
   }
 
   openEdit(content: any, User : User) {
