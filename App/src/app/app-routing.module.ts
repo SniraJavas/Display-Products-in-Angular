@@ -10,6 +10,10 @@ import { UserEditComponent } from './components/user/user-edit/user-edit.compone
 import { UserDetailsComponent } from './components/user/user-details/user-details.component';
 import { UserAddComponent } from './components/user/user-add/user-add.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';
+import { InvoiceAddComponent } from './components/invoice/invoice-add/invoice-add.component';
+import { InvoiceDetailsComponent } from './components/invoice/invoice-details/invoice-details.component';
+import { InvoiceEditComponent } from './components/invoice/invoice-edit/invoice-edit.component';
+import { InvoiceListComponent } from './components/invoice/invoice-list/invoice-list.component';
 const routes: Routes = [{ path: 'products-list', component: ProductListComponent},
                         { path: 'product-add', component: ProductAddComponent},
                         {path: 'product-detail', component: ProductDetailsComponent},
@@ -18,8 +22,11 @@ const routes: Routes = [{ path: 'products-list', component: ProductListComponent
                         { path: 'user-add', component: UserAddComponent},
                         {path: 'user-detail', component: UserDetailsComponent},
                         {path: 'user-edit' , component: UserEditComponent},
+                        { path: 'invoices-list', component: InvoiceListComponent},
+                        { path: 'invoice-add', component: InvoiceAddComponent},
+                        {path: 'invoice-detail', component: InvoiceDetailsComponent},
+                        {path: 'invoice-edit' , component: InvoiceEditComponent},
                         {path: '**', component: AppComponent }]
-
 
 @NgModule({
   declarations: [],

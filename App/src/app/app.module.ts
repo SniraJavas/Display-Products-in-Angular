@@ -19,6 +19,11 @@ import { UserEditComponent } from './components/user/user-edit/user-edit.compone
 import { UserAddComponent } from './components/user/user-add/user-add.component';
 import { UserDeleteComponent } from './components/user/user-delete/user-delete.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';
+import { InvoiceAddComponent } from './components/invoice/invoice-add/invoice-add.component';
+import { InvoiceDeleteComponent } from './components/invoice/invoice-delete/invoice-delete.component';
+import { InvoiceDetailsComponent } from './components/invoice/invoice-details/invoice-details.component';
+import { InvoiceEditComponent } from './components/invoice/invoice-edit/invoice-edit.component';
+import { InvoiceListComponent } from './components/invoice/invoice-list/invoice-list.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +39,11 @@ import { UserListComponent } from './components/user/user-list/user-list.compone
     UserAddComponent,
     UserDeleteComponent,
     UserListComponent,
+    InvoiceAddComponent,
+    InvoiceEditComponent,
+    InvoiceDetailsComponent,
+    InvoiceListComponent,
+    InvoiceDeleteComponent,
   ],
   imports: [
     BrowserModule,
