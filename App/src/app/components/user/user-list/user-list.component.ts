@@ -1,68 +1,69 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { Product, ProductsService } from 'src/app/services/product/product.service';
+import { User, UserService } from 'src/app/services/user/user.service';
 
 @Component({
-  selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  selector: 'app-user-list',
+  templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.component.css']
 })
-export class ProductListComponent implements OnInit {
+export class UserListComponent implements OnInit {
 
   
-  products: Product[] = [];
-  selectedProduct!: Product;
+  
+  Users: User[] = [];
+  selectedUser!: User;
   closeResult = '';
   isEditable = false;
  
   constructor(
     private modalService: NgbModal,
     private route: ActivatedRoute,
-    public rest: ProductsService,
+    public rest: UserService,
     private router: Router) { }
 
-    @Input() productData: Product = { id: 0,
+    @Input() UserData: User = { id: 0,
       name: '',
-      price: 0,
-      quantity: 0,
-      stock: 0};
+      surname: '',
+      email: '',
+      role: 0};
     
       @Input() modalTittle: string = '';
   ngOnInit(): void {
     console.log("inside ngOnInit");
-    this.getProducts();
+    this.getUsers();
   }
 
-  getProducts(): void {
-    this.rest.getProducts().subscribe((resp: any) => {
-      this.products = resp;
+  getUsers(): void {
+    this.rest.getUsers().subscribe((resp: any) => {
+      this.Users = resp;
     });
   }
 
   add(): void {
-    this.router.navigate(['/product-add']);
+    this.router.navigate(['/user-add']);
   }
 
-  openEdit(content: any, Product : Product) {
-    console.log("Product Edit : ", Product);
-    this.productData = Product;
-    this.modalTittle = 'Edit Product';
+  openEdit(content: any, User : User) {
+    console.log("User Edit : ", User);
+    this.UserData = User;
+    this.modalTittle = 'Edit User';
     this.isEditable = true;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result: any) => {
       this.closeResult = `Closed with: ${result}`;
-      this.updateProduct();
+      this.updateUser();
 
     }, (reason: any) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
 
-  openView(content: any, product : Product) {
+  openView(content: any, User : User) {
     console.log("content ",content);
-    console.log("product ",product);
-    this.productData = product;
-    this.modalTittle = 'Product Details'
+    console.log("User ",User);
+    this.UserData = User;
+    this.modalTittle = 'User Details'
     this.isEditable = false;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result: any) => {
     
@@ -71,14 +72,14 @@ export class ProductListComponent implements OnInit {
     });
   }
   
-  openDelete(content: any, Product : Product) {
-    this.productData = Product;
-    this.modalTittle = 'Press continue to DELETE this product';
+  openDelete(content: any, User : User) {
+    this.UserData = User;
+    this.modalTittle = 'Press continue to DELETE this User';
     this.isEditable = false;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result: any) => {
     console.log("del ",result);
     if(result == 'Continue click'){
-      this.delete(this.productData.id);
+      this.delete(this.UserData.id);
     }
     }, (reason: any) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -98,21 +99,20 @@ export class ProductListComponent implements OnInit {
 
   delete(id: number): void {
     console.log("id ", id);
-    this.rest.deleteProduct(id)
+    this.rest.deleteUser(id)
       .subscribe(() => {
-          this.getProducts();
+          this.getUsers();
         }, (err: any) => {
           console.log(err);
         }
       );
   }
 
-  updateProduct() {
-    this.rest.updateProduct(this.productData.id, this.productData).subscribe((result) => {
-      this.router.navigate(['/product-details/'+result._id]);
+  updateUser() {
+    this.rest.updateUser(this.UserData.id, this.UserData).subscribe((result) => {
+      this.router.navigate(['/User-details/'+result._id]);
     }, (err) => {
       console.log(err);
     });
   }
-
 }

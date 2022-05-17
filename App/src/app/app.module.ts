@@ -14,6 +14,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductListComponent } from './components/product/product-list/product-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { UserDetailsComponent } from './components/user/user-details/user-details.component';
+import { UserEditComponent } from './components/user/user-edit/user-edit.component';
+import { UserAddComponent } from './components/user/user-add/user-add.component';
+import { UserDeleteComponent } from './components/user/user-delete/user-delete.component';
+import { UserListComponent } from './components/user/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +29,11 @@ import { FormsModule } from '@angular/forms';
     ProductDeleteComponent,
     ProductDetailsComponent,
     ProductListComponent,
+    UserDetailsComponent,
+    UserEditComponent,
+    UserAddComponent,
+    UserDeleteComponent,
+    UserListComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,21 @@
+
+<div class="m-5 content-style" >
+    <h2>Add User</h2>
+    <div>
+      <form>
+        <div class="form-group">
+          <div>
+            <label for="userName">Name</label>
+            <input type="text" id="userName" class="form-control" placeholder="Name"   [(ngModel)]="UserData.name" [ngModelOptions]="{standalone: true}"><br>
+            <label for="userPrice">Surname</label>
+            <input  type="text" id="surname" class="form-control" placeholder="Surname" [(ngModel)]="UserData.surname" name="surname"><br>
+            <label for="userStock">Email</label>
+            <input  type="text" id="email" class="form-control" placeholder="Email" [(ngModel)]="UserData.email" name="email"><br>
+            <label for="userStock">Role</label>
+            <input  type="text" id="role" class="form-control" placeholder="Role" [(ngModel)]="UserData.role" name="role"><br>
+          </div>
+        </div>
+      </form>
+    </div>
+    <button routerLink="/user-list" (click)="addUser()">Create</button>
+  </div>
