@@ -51,7 +51,7 @@ export class InvoiceListComponent implements OnInit {
   }
 
   add(): void {
-    this.router.navigate(['/Invoice-add']);
+    this.router.navigate(['/invoice-add']);
   }
 
   openEdit(content: any, Invoice : Invoice) {

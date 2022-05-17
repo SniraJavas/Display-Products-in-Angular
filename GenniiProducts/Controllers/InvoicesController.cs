@@ -83,13 +83,33 @@ namespace GenniiProducts.Controllers
         // POST: api/Invoices
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Invoice>> PostInvoice(Invoice invoice)
+        public async Task<ObjectResult> PostInvoice(InvoiceDto invoice)
         {
           if (_context.Invoices == null)
           {
               return Problem("Entity set 'GenniProductsContext.Invoices'  is null.");
           }
-            _context.Invoices.Add(invoice);
+
+           
+            var invoiceTransfer = new Invoice()
+            {
+                Id = invoice.Id,
+                Created = DateTime.Now,
+                Total = invoice.Total,
+                UserId = invoice.User.Id,
+            };
+            _context.Invoices.Add(invoiceTransfer);
+            await _context.SaveChangesAsync();
+
+            var InvoiceId = _context.Invoices.Where(x => x.Id != 0).OrderByDescending(m => m.Id).First();
+            foreach (var Product in invoice.Products) {
+                _context.InvoiceProduct.Add(new InvoiceProduct()
+                {
+                    ProductsId = Product.Id,
+                    InvoiceId = InvoiceId.Id
+                });
+            };
+          
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetInvoice", new { id = invoice.Id }, invoice);

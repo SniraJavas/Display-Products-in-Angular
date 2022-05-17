@@ -25,5 +25,6 @@ namespace GenniiProducts.Models
         public DbSet<Product> Products { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<InvoiceProduct> InvoiceProduct { get; set; }
     }
 }

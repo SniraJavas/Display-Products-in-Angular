@@ -1,1 +1,82 @@
-<p>invoice-list works!</p>
+<h2>Invoices</h2>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{modalTittle}}  </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<div class="modal-body">
+  <div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6" id="div1">
+                <h3>Created by :</h3>
+                <input type="text" id="name" class="form-control" placeholder="Name"   [(ngModel)]="InvoiceData.user.name" [ngModelOptions]="{standalone: true}"><br>
+                <input id="surname" type="text" class="form-control" placeholder="Surname" [(ngModel)]="InvoiceData.user.surname" name="username" ><br>
+                <input id="email"  type="text" class="form-control" placeholder="Email" [(ngModel)]="InvoiceData.user.email" name="email" ><br>
+            </div>
+            <div class="col-md-6" id="div2">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                      </tr>
+                    </tbody>
+                  </table>  
+            </div>
+        </div>
+      <div *ngIf="isEditable"> 
+        <input type="text" id="name" class="form-control" placeholder="Name"   [(ngModel)]="InvoiceData.user.name" [ngModelOptions]="{standalone: true}"><br>
+        <input id="surname" class="form-control" placeholder="Surname" [(ngModel)]="InvoiceData.user.surname" name="username" ><br>
+        <input id="role" class="form-control" placeholder="Total"     [(ngModel)]=" InvoiceData.total" name="total" ><br>
+        <input id="email" class="form-control" placeholder="Created"     [(ngModel)]=" InvoiceData.created" name="created" ><br>
+      </div>
+      <div *ngIf="!isEditable"> 
+        <input type="text" id="name" class="form-control" placeholder="Name"   [(ngModel)]="InvoiceData.user.name" [ngModelOptions]="{standalone: true}"><br>
+        <input id="surname" class="form-control" placeholder="Surname" [(ngModel)]="InvoiceData.user.surname" name="username" ><br>
+        <input id="role" class="form-control" placeholder="Total"     [(ngModel)]=" InvoiceData.total" name="total" ><br>
+        <input id="email" class="form-control" placeholder="Created"     [(ngModel)]=" InvoiceData.created" name="created" ><br>
+      </div>
+    </div>
+</div>
+</div>
+<div  class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="modal.close('Continue click')">Continue</button>
+</div>
+</ng-template>
+<div class="Invoices">
+  <ul  *ngFor="let invoice of Invoices;index as i;" class="product-fields">
+    <li><p >{{i+1}} {{" "+invoice.user.name+" "+invoice.user.surname}}</p></li>
+    <li><p >{{invoice.total}}</p></li>
+    <li><a (click)="openView(content,invoice)">View</a><a  (click)="openEdit(content,invoice)" >Edit</a><a (click)="openDelete(content,invoice)">Delete</a></li>
+  </ul>
+</div>
+<div>
+    <button type="button" class="create-product" (click)="add()">
+        <i class="fa fa-plus" aria-hidden="true">Add New Invoice</i>
+    </button>
+  </div>
