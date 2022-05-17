@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { Product, ProductsService } from 'src/app/services/product/product/product.service';
+import { Product, ProductsService } from 'src/app/services/product/product.service';
 
 @Component({
   selector: 'app-product-list',

@@ -10,6 +10,10 @@ const routes: Routes = [{ path: 'products-list', component: ProductListComponent
                         { path: 'product-add', component: ProductAddComponent},
                         {path: 'product-detail', component: ProductDetailsComponent},
                         {path: 'product-edit' , component: ProductEditComponent},
+                        { path: 'users-list', component: ProductListComponent},
+                        { path: 'user-add', component: ProductAddComponent},
+                        {path: 'user-detail', component: ProductDetailsComponent},
+                        {path: 'user-edit' , component: ProductEditComponent},
                         {path: '**', component: AppComponent }]
 
 
