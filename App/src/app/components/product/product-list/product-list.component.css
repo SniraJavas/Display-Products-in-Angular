@@ -41,7 +41,7 @@
   .products li {
     display: inline-block;
       margin: 13px;
-      width: 46%;
+      width: 19%;
   }
   .products a {
     background: red;
