@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Invoice, InvoiceService } from 'src/app/services/Invoice/Invoice.service';
+import { User, UserService } from 'src/app/services/user/user.service';
 import { UserAddComponent } from '../../user/user-add/user-add.component';
 
 @Component({
@@ -11,7 +12,8 @@ import { UserAddComponent } from '../../user/user-add/user-add.component';
 })
 export class InvoiceListComponent implements OnInit {
 
-  Invoices: Invoice[] = [];
+  invoices: Invoice[] = [];
+  user: User | undefined;
   selectedInvoice!: Invoice;
   closeResult = '';
   isEditable = false;
@@ -20,6 +22,7 @@ export class InvoiceListComponent implements OnInit {
     private modalService: NgbModal,
     private route: ActivatedRoute,
     public rest: InvoiceService,
+    public userRest : UserService,
     private router: Router) { }
 
     @Input() InvoiceData: Invoice =  {
@@ -32,6 +35,7 @@ export class InvoiceListComponent implements OnInit {
         role: 0
 
       },
+      userId : 0,
       products: []= [],
       created: Date.now.toString(),
       total: 0
@@ -42,13 +46,29 @@ export class InvoiceListComponent implements OnInit {
   ngOnInit(): void {
     console.log("inside ngOnInit");
     this.getInvoices();
+    console.log(this.invoices);
   }
 
   getInvoices(): void {
     this.rest.getInvoices().subscribe((resp: any) => {
-      this.Invoices = resp;
+      this.invoices =resp ;
+      let index =0;
+      this.invoices.forEach(element => {
+        this.userRest.getUserById(element.userId).subscribe((resp: any) => {
+          console.log("resp :",resp)
+          this.invoices[index].user = resp;
+          index++;
+        });
+      });
+      
+  
     });
   }
+
+  ngAfterInit(){
+    
+  }
+
 
   add(): void {
     this.router.navigate(['/invoice-add']);

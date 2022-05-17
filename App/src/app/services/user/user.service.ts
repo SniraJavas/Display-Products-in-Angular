@@ -79,6 +79,13 @@ export class UserService {
     );
   }
 
+  getUserById(Id : number): Observable<any>{
+    return this.http.get<any>(endpoint + 'Users/' + Id, httpOptions).pipe(
+      tap(_ => console.log(`get User id=${Id}`)),
+      catchError(this.handleError)
+    );
+  }
+
 
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {

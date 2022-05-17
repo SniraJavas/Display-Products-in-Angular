@@ -69,14 +69,15 @@
 </div>
 </ng-template>
 <div class="Invoices">
-  <ul  *ngFor="let invoice of Invoices;index as i;" class="product-fields">
+  <ul  *ngFor="let invoice of invoices;index as i;" class="invoice-fields">
     <li><p >{{i+1}} {{" "+invoice.user.name+" "+invoice.user.surname}}</p></li>
-    <li><p >{{invoice.total}}</p></li>
+    <li><p >R{{invoice.total}}</p></li>
+    <li><p >{{invoice.created}}</p></li>
     <li><a (click)="openView(content,invoice)">View</a><a  (click)="openEdit(content,invoice)" >Edit</a><a (click)="openDelete(content,invoice)">Delete</a></li>
   </ul>
 </div>
 <div>
-    <button type="button" class="create-product" (click)="add()">
+    <button type="button" class="create-invoice" (click)="add()">
         <i class="fa fa-plus" aria-hidden="true">Add New Invoice</i>
     </button>
   </div>

@@ -15,6 +15,7 @@ const httpOptions = {
 export interface Invoice {
     id: number,
     user: User,
+    userId : number,
     products: Product[],
     created: String,
     total: number
