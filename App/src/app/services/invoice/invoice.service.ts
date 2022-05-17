@@ -14,9 +14,9 @@ const httpOptions = {
 
 export interface Invoice {
     id: number,
-    name: User,
+    user: User,
     products: Product[],
-    created: Date,
+    created: String,
     total: number
 }
 
@@ -78,7 +78,6 @@ export class InvoiceService {
       catchError(this.handleError)
     );
   }
-
 
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
