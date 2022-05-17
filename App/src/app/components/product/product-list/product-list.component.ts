@@ -58,8 +58,10 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  openView(content: any, Product : Product) {
-    this.productData = Product;
+  openView(content: any, product : Product) {
+    console.log("content ",content);
+    console.log("product ",product);
+    this.productData = product;
     this.modalTittle = 'Product Details'
     this.isEditable = false;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result: any) => {
