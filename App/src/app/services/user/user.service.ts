@@ -1,7 +1,24 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map, catchError, tap, throwError } from 'rxjs';
-import { Product } from '../product/product/product.service';
+
+
+const endpoint = 'https://localhost:7205/api/';
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Access-Control-Allow-Origin': '*',
+  })
+  
+};
+
+export interface User {
+    id: number,
+    name: string,
+    surname: string,
+    email: string,
+    role: number
+}
 
 @Injectable({
   providedIn: 'root'
@@ -19,43 +36,45 @@ export class UserService {
     return body || { };
   }
 
-  getProducts(): Observable<any> {
-    return this.http.get(endpoint + 'products').pipe(map(this.extractData),
+  getUsers(): Observable<any> {
+    return this.http.get(endpoint + 'Users').pipe(map(this.extractData),
       catchError(this.handleError)
     );
   }
 
-  getProduct( Id: number): Observable<any> {
-    console.log("getByID Product id ", Id);
-    return this.http.get(endpoint + 'products/' + Id).pipe(
+  getUser( Id: number): Observable<any> {
+    console.log("getByID User id ", Id);
+    return this.http.get(endpoint + 'Users/' + Id).pipe(
       map(this.extractData),
       catchError(this.handleError)
     );
   }
 
-  addProduct (product: { id: number,
+  addUser (User: {
+    id: number,
     name: string,
-    price: number,
-    quantity: number,
-    stock: number}): Observable<any> {
-    console.log("Product to Add", product);
-    return this.http.post<any>(endpoint + 'products', JSON.stringify(product), httpOptions).pipe(
-      tap((product) => console.log(`added product w/ id=${product.id}`)),
+    surname: string,
+    email: string,
+    role: number
+}): Observable<any> {
+    console.log("User to Add", User);
+    return this.http.post<any>(endpoint + 'Users', JSON.stringify(User), httpOptions).pipe(
+      tap((User) => console.log(`added User w/ id=${User.id}`)),
       catchError(this.handleError)
     );
   }
 
-  updateProduct ( Id: number, product: Product): Observable<any> {
-    console.log("product to update ID ",Id );
-    return this.http.put(endpoint + 'products/' + Id, JSON.stringify(product), httpOptions).pipe(
-      tap(_ => console.log(`updated product id=${Id}`)),
+  updateUser ( Id: number, User: User): Observable<any> {
+    console.log("User to update ID ",Id );
+    return this.http.put(endpoint + 'Users/' + Id, JSON.stringify(User), httpOptions).pipe(
+      tap(_ => console.log(`updated User id=${Id}`)),
       catchError(this.handleError)
     );
   }
 
-  deleteProduct ( Id: number): Observable<any> {
-    return this.http.delete<any>(endpoint + 'products/' + Id, httpOptions).pipe(
-      tap(_ => console.log(`deleted product id=${Id}`)),
+  deleteUser ( Id: number): Observable<any> {
+    return this.http.delete<any>(endpoint + 'Users/' + Id, httpOptions).pipe(
+      tap(_ => console.log(`deleted User id=${Id}`)),
       catchError(this.handleError)
     );
   }

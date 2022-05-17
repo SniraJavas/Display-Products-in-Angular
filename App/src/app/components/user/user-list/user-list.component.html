@@ -1,1 +1,43 @@
-<p>user-list works!</p>
+<h2>Users</h2>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{modalTittle}}  </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<div class="modal-body">
+  <div>
+    <div class="form-group">
+      <div *ngIf="isEditable"> 
+        <input type="text" id="name" class="form-control" placeholder="Name"   [(ngModel)]=" UserData.name" [ngModelOptions]="{standalone: true}"><br>
+        <input id="surname" class="form-control" placeholder="Surname" [(ngModel)]=" UserData.surname" name="name" ><br>
+        <input id="email" class="form-control" placeholder="Email"     [(ngModel)]=" UserData.email" name="stock" ><br>
+        <input id="role" class="form-control" placeholder="Email"     [(ngModel)]=" UserData.role" name="stock" ><br>
+      </div>
+      <div *ngIf="!isEditable"> 
+        <input type="text" id="name" class="form-control" placeholder="Name"   [(ngModel)]=" UserData.name" [ngModelOptions]="{standalone: true}" readonly><br>
+        <input id="surname" class="form-control" placeholder="Surname" [(ngModel)]=" UserData.surname" name="name" readonly><br>
+        <input id="email" class="form-control" placeholder="Email"     [(ngModel)]=" UserData.email" name="email" readonly><br>
+        <input id="role" class="form-control" placeholder="Stock"     [(ngModel)]=" UserData.role" name="stock" readonly><br>
+      </div>
+    </div>
+</div>
+</div>
+<div  class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="modal.close('Continue click')">Continue</button>
+</div>
+</ng-template>
+<div class="users">
+  <ul  *ngFor="let p of Users;index as i;" class="product-fields">
+    <li><p >{{i+1}} {{p.name}}</p></li>
+    <li><p >{{p.surname}}</p></li>
+    <li><p >{{p.email}}</p></li>
+    <li><a (click)="openView(content,p)">View</a><a  (click)="openEdit(content,p)" >Edit</a><a (click)="openDelete(content,p)">Delete</a></li>
+  </ul>
+</div>
+<div>
+    <button type="button" class="create-product" (click)="add()">
+        <i class="fa fa-plus" aria-hidden="true">Add New Product</i>
+    </button>
+  </div>

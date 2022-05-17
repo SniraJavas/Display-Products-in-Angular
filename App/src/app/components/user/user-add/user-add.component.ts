@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from 'src/app/services/user/user.service';
+
 
 @Component({
   selector: 'app-user-add',
@@ -6,10 +9,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-add.component.css']
 })
 export class UserAddComponent implements OnInit {
+  @Input() UserData = {id: 0,
+  name: '',
+  surname: '',
+  email: '',
+  role: 0}
 
-  constructor() { }
+  constructor(public rest:UserService, private route: ActivatedRoute, private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+  }
+
+  addUser() {
+    
+    this.rest.addUser(this.UserData).subscribe((result: { UserID: number; }) => {
+      this.router.navigate(['/User-details/'+result.UserID]);
+    }, (err: any) => {
+      console.log(err);
+    });
   }
 
 }
+
+
