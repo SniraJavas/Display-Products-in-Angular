@@ -41,7 +41,7 @@ export class ProductListComponent implements OnInit {
   }
 
   add(): void {
-    this.router.navigate(['/productadd']);
+    this.router.navigate(['/product-add']);
   }
 
   openEdit(content: any, Product : Product) {

@@ -53,11 +53,11 @@ export class ProductsService{
     );
   }
 
-  addProduct (product: { Id: number,
-    Name: string,
-    Price: number,
-    Quantity: number,
-    Stock: number}): Observable<any> {
+  addProduct (product: { id: number,
+    name: string,
+    price: number,
+    quantity: number,
+    stock: number}): Observable<any> {
     console.log("Product to Add", product);
     return this.http.post<any>(endpoint + 'products', JSON.stringify(product), httpOptions).pipe(
       tap((product) => console.log(`added product w/ id=${product.id}`)),

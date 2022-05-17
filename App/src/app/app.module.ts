@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductListComponent } from './components/product/product-list/product-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
     NgbModule,
     AppRoutingModule,
     RouterModule,
-    HttpClientModule 
+    HttpClientModule ,
+    FormsModule
   ],
   providers: [AppRoutingModule],
   bootstrap: [AppComponent],

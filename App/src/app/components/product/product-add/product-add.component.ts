@@ -9,11 +9,11 @@ import { ProductsService } from 'src/app/services/product/product/product.servic
 })
 export class ProductAddComponent implements OnInit {
 
-  @Input() productData = { Id: 0,
-    Name: '',
-    Price: 0,
-    Quantity: 0,
-    Stock: 0};
+  @Input() productData = { id: 0,
+    name: '',
+    price: 0,
+    quantity: 0,
+    stock: 0};
 
   constructor(public rest:ProductsService, private route: ActivatedRoute, private router: Router) { }
 
