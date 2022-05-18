@@ -11,7 +11,7 @@ import { Product, ProductsService } from 'src/app/services/product/product.servi
 
 export class ProductListComponent implements OnInit {
 
-  
+  cartProductList :Product[] = [];
   products: Product[] = [];
   selectedProduct!: Product;
   closeResult = '';
@@ -31,7 +31,7 @@ export class ProductListComponent implements OnInit {
     
       @Input() modalTittle: string = '';
   ngOnInit(): void {
-    console.log("inside ngOnInit");
+
     this.getProducts();
   }
 
@@ -46,7 +46,7 @@ export class ProductListComponent implements OnInit {
   }
 
   openEdit(content: any, Product : Product) {
-    console.log("Product Edit : ", Product);
+  
     this.productData = Product;
     this.modalTittle = 'Edit Product';
     this.isEditable = true;
@@ -60,8 +60,7 @@ export class ProductListComponent implements OnInit {
   }
 
   openView(content: any, product : Product) {
-    console.log("content ",content);
-    console.log("product ",product);
+
     this.productData = product;
     this.modalTittle = 'Product Details'
     this.isEditable = false;
@@ -72,10 +71,6 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  BuyProduct(content: any,Product : Product){
-    this.productAdded.emit(Product);
-  }
-  
   openDelete(content: any, Product : Product) {
     this.productData = Product;
     this.modalTittle = 'Press continue to DELETE this product';
@@ -120,4 +115,17 @@ export class ProductListComponent implements OnInit {
     });
   }
 
+  addProductToInvoice(content: any,product : Product) {
+  
+    const productExistInInvoice = this.cartProductList.find(({name}) => name === product.name); // find product by name
+    if (!productExistInInvoice) {
+      this.cartProductList.push(product); // enhance "porduct" opject with "num" property
+      return;
+    }
+    //productExistInInvoice.num += 1;
+  }
+
+  removeProduct(product: { name: any; }) {
+    this.cartProductList = this.cartProductList.filter(({name}) => name !== product.name)
+   }
 }

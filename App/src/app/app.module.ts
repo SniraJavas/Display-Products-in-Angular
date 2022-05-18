@@ -24,6 +24,7 @@ import { InvoiceDeleteComponent } from './components/invoice/invoice-delete/invo
 import { InvoiceDetailsComponent } from './components/invoice/invoice-details/invoice-details.component';
 import { InvoiceEditComponent } from './components/invoice/invoice-edit/invoice-edit.component';
 import { InvoiceListComponent } from './components/invoice/invoice-list/invoice-list.component';
+import { ShoppingInvoiceComponent } from './components/invoice/shopping-invoice/shopping-invoice.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,9 @@ import { InvoiceListComponent } from './components/invoice/invoice-list/invoice-
     InvoiceDetailsComponent,
     InvoiceListComponent,
     InvoiceDeleteComponent,
+    ShoppingInvoiceComponent,
   ],
+  exports: [ShoppingInvoiceComponent],
   imports: [
     BrowserModule,
     MDBBootstrapModule.forRoot(),

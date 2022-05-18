@@ -27,17 +27,21 @@
   <button type="button" class="btn btn-outline-dark" (click)="modal.close('Continue click')">Continue</button>
 </div>
 </ng-template>
-<div>
-  <div class="products c0l-6">
+<div class="row">
+  <div class="products col-6">
     <ul  *ngFor="let p of products;index as i;" class="product-fields">
       <li><p >{{i+1}} {{p.name}}</p></li>
       <li><p >R{{p.price}}</p></li>
-      <li><a (click)="openView(content,p)">View</a><a  (click)="openEdit(content,p)" >Edit</a><a (click)="openDelete(content,p)">Delete</a><a (click)="BuyProduct(content,p)">+</a></li>
+      <li><a (click)="openView(content,p)">View</a><a  (click)="openEdit(content,p)" >Edit</a><a (click)="openDelete(content,p)">Delete</a><a (click)="addProductToInvoice(content,p)">+</a></li>
     </ul>
-  </div>
-  <div>
+    <div>
       <button type="button" class="create-product" (click)="add()">
           <i class="fa fa-plus" aria-hidden="true">Add New Product</i>
       </button>
     </div>
+  </div>
+  <div class="cart col-4">
+        <app-shopping-invoice [products]="cartProductList" (productRemoved)="removeProduct($event)"></app-shopping-invoice>
+  </div>
+
 </div>

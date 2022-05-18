@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Invoice, InvoiceService } from 'src/app/services/Invoice/Invoice.service';
@@ -43,6 +43,13 @@ export class InvoiceListComponent implements OnInit {
   ;
     
       @Input() modalTittle: string = '';
+
+      @Input()
+      products: any[] = [];
+      @Output() productAdded = new EventEmitter();
+      addProductToInvoice(product: any) {
+        this.productAdded.emit(product);
+      }
   ngOnInit(): void {
     console.log("inside ngOnInit");
     this.getInvoices();
