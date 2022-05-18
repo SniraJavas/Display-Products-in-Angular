@@ -15,7 +15,7 @@
       <td>{{ item.price }}</td>
       <td>{{ item.quantity }}</td>
       <td>
-        <button type="button">X</button>
+        <button type="button" (click)="removeProduct(item)">X</button>
       </td>
     </tr>
   </tbody>
