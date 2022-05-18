@@ -11,12 +11,12 @@ export class ShoppingInvoiceComponent{
   products: Product[]=[];
   @Input()
   product!: any[];
-  @Input () total = 0;
+  @Input() total = 0;
   index = 0;
   ngOnChanges(changes: SimpleChanges) {
     let selectedProduct = changes["Product"];
     
-      if(!selectedProduct.firstChange){
+      if(selectedProduct != null){
         this.products.push(selectedProduct.currentValue);
         this.index++;
       }

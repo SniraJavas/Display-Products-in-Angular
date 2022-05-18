@@ -41,7 +41,7 @@
     </div>
   </div>
   <div class="cart col-4">
-        <app-shopping-invoice [products]="cartProductList" (productRemoved)="removeProduct($event)"></app-shopping-invoice>
+        <app-shopping-invoice [products]="cartProductList" [total]="total" (productRemoved)="removeProduct($event)"></app-shopping-invoice>
   </div>
 
 </div>

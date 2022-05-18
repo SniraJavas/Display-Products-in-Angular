@@ -12,7 +12,7 @@ import { Product, ProductsService } from 'src/app/services/product/product.servi
 export class ProductListComponent implements OnInit {
 
   cartProductList :Product[] = [];
-  total = 0;
+  @Output() total = 0;
   products: Product[] = [];
   selectedProduct!: Product;
   closeResult = '';
@@ -121,10 +121,12 @@ export class ProductListComponent implements OnInit {
     const productExistInInvoice = this.cartProductList.find(({id}) => id === product.id); // find product by name
     if (!productExistInInvoice) {
       this.cartProductList.push(product); // enhance "porduct" opject with "num" property
+      this.total += product.price;
       return;
     }else{
       let index = this.cartProductList.indexOf(productExistInInvoice);
       this.cartProductList[index].quantity++;
+      this.total += this.cartProductList[index].price;
     }
   }
 
