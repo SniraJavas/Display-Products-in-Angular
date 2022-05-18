@@ -60,7 +60,7 @@ export class InvoiceService {
     total: number
 }): Observable<any> {
     console.log("Invoice to Add", Invoice);
-    return this.http.post<any>(endpoint + 'Invoices', JSON.stringify(Invoice), httpOptions).pipe(
+    return this.http.post<Invoice>(endpoint + 'Invoices', JSON.stringify(Invoice), httpOptions).pipe(
       tap((Invoice) => console.log(`added Invoice w/ id=${Invoice.id}`)),
       catchError(this.handleError)
     );

@@ -29,6 +29,7 @@ export class ShoppingInvoiceComponent{
 
   removeProduct(product: Product) {
     this.productRemoved.emit(product)
+    this.total -= product.price;
   }
   addInvoice(){
     //User is mocked and will be placed after login

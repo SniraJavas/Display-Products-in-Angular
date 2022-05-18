@@ -138,6 +138,7 @@ export class ProductListComponent implements OnInit {
           if(productExistInInvoice.quantity > 1){
             let index = this.cartProductList.indexOf(productExistInInvoice);
             this.cartProductList[index].quantity--;
+            
           }else{
             this.cartProductList = this.cartProductList.filter(({id}) => id !== product.id);
           }
