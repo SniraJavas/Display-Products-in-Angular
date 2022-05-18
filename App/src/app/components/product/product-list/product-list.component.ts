@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Product, ProductsService } from 'src/app/services/product/product.service';
@@ -8,14 +8,16 @@ import { Product, ProductsService } from 'src/app/services/product/product.servi
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
+
 export class ProductListComponent implements OnInit {
 
-  
+  cartProductList :Product[] = [];
+  total = 0;
   products: Product[] = [];
   selectedProduct!: Product;
   closeResult = '';
   isEditable = false;
- 
+  @Output() productAdded = new EventEmitter();
   constructor(
     private modalService: NgbModal,
     private route: ActivatedRoute,
@@ -30,7 +32,7 @@ export class ProductListComponent implements OnInit {
     
       @Input() modalTittle: string = '';
   ngOnInit(): void {
-    console.log("inside ngOnInit");
+
     this.getProducts();
   }
 
@@ -45,7 +47,7 @@ export class ProductListComponent implements OnInit {
   }
 
   openEdit(content: any, Product : Product) {
-    console.log("Product Edit : ", Product);
+  
     this.productData = Product;
     this.modalTittle = 'Edit Product';
     this.isEditable = true;
@@ -59,8 +61,7 @@ export class ProductListComponent implements OnInit {
   }
 
   openView(content: any, product : Product) {
-    console.log("content ",content);
-    console.log("product ",product);
+
     this.productData = product;
     this.modalTittle = 'Product Details'
     this.isEditable = false;
@@ -70,7 +71,7 @@ export class ProductListComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
-  
+
   openDelete(content: any, Product : Product) {
     this.productData = Product;
     this.modalTittle = 'Press continue to DELETE this product';
@@ -115,4 +116,19 @@ export class ProductListComponent implements OnInit {
     });
   }
 
+  addProductToInvoice(content: any,product : Product) {
+  
+    const productExistInInvoice = this.cartProductList.find(({id}) => id === product.id); // find product by name
+    if (!productExistInInvoice) {
+      this.cartProductList.push(product); // enhance "porduct" opject with "num" property
+      return;
+    }else{
+      let index = this.cartProductList.indexOf(productExistInInvoice);
+      this.cartProductList[index].quantity++;
+    }
+  }
+
+  removeProduct(product: { name: any; }) {
+    this.cartProductList = this.cartProductList.filter(({name}) => name !== product.name)
+   }
 }
