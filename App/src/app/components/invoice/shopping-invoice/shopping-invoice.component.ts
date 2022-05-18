@@ -24,7 +24,6 @@ export class ShoppingInvoiceComponent{
   @Output() productRemoved = new EventEmitter();
 
   removeProduct(product: Product) {
-    console.log("Remove ",product)
     this.productRemoved.emit(product)
   }
 }
