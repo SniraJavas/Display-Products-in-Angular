@@ -4,6 +4,7 @@ using GenniiProducts.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GenniiProducts.Migrations
 {
     [DbContext(typeof(GenniProductsContext))]
-    partial class GenniProductsContextModelSnapshot : ModelSnapshot
+    [Migration("20220517140920_Update many-to-many relationship InvoiceProducts")]
+    partial class UpdatemanytomanyrelationshipInvoiceProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,26 +43,9 @@ namespace GenniiProducts.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Invoices");
-                });
-
-            modelBuilder.Entity("GenniiProducts.Models.InvoiceProduct", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("InvoiceId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("InvoiceProduct");
                 });
 
             modelBuilder.Entity("GenniiProducts.Models.Product", b =>
@@ -116,6 +101,47 @@ namespace GenniiProducts.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("InvoiceProduct", b =>
+                {
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductsId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductsId", "ProductsId1");
+
+                    b.HasIndex("ProductsId1");
+
+                    b.ToTable("InvoiceProduct");
+                });
+
+            modelBuilder.Entity("GenniiProducts.Models.Invoice", b =>
+                {
+                    b.HasOne("GenniiProducts.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("InvoiceProduct", b =>
+                {
+                    b.HasOne("GenniiProducts.Models.Invoice", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GenniiProducts.Models.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
