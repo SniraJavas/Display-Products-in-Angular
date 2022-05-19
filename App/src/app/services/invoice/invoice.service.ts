@@ -13,14 +13,13 @@ const httpOptions = {
 };
 
 export interface Invoice {
-    id: number,
-    user: User,
-    userId : number,
-    products: Product[],
-    created: String,
-    total: number
+  id: number,
+  user: User,
+  userId : number,
+  products: Product[],
+  created: String,
+  total: number
 }
-
 @Injectable({
   providedIn: 'root'
 })
@@ -51,19 +50,13 @@ export class InvoiceService {
     );
   }
 
-  addInvoice (Invoice:{
-    id: number,
-    user: User,
-    userId : number,
-    products: Product[],
-    created: String,
-    total: number
-}): Observable<any> {
+  addInvoice (Invoice:Invoice): Observable<any> {
     console.log("Invoice to Add", Invoice);
-    return this.http.post<any>(endpoint + 'Invoices', JSON.stringify(Invoice), httpOptions).pipe(
+    var response = this.http.post<Invoice>(endpoint + 'Invoices', JSON.stringify(Invoice), httpOptions).pipe(
       tap((Invoice) => console.log(`added Invoice w/ id=${Invoice.id}`)),
       catchError(this.handleError)
     );
+    return response;
   }
 
   updateInvoice ( Id: number, Invoice: Invoice): Observable<any> {
