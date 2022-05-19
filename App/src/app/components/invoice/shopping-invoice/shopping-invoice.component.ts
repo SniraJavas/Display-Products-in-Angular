@@ -34,21 +34,24 @@ export class ShoppingInvoiceComponent{
   addInvoice(){
     //User is mocked and will be placed after login
     console.log("adding ...")
-    let invoice : Invoice= {
+    let invoice = {
       id: 0,
-      user:{
+      user: {
         id: 4,
         name: "Sizwe",
         surname: "Jumba",
         email: "snirajumba@gail.com",
-        role: 1
+        role: "1"
       },
-      userId : 4,
-      products:  this.products,
-      created: new Date().toString(),
-      total: this.total
-  }
-  this.restInvoice.addInvoice(invoice);
+      products: this.products,
+      userId: 4,
+      created: "2022-05-17T19:05:13.765Z",
+      total: this.total,
+    }
+  this.restInvoice.addInvoice(invoice).subscribe((resp: any) => {
+    console.log(resp);
+    this.products = resp;
+  });;
     // this.newInvoice.emit(invoice);
   }
 }

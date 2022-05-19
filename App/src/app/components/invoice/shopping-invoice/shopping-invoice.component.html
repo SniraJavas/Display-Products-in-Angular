@@ -1,5 +1,5 @@
 <div *ngIf="products.length != 0">
-<h1>Shopping Invoice</h1>
+<h1>Invoice</h1>
 <table >
   <thead>
     <tr>
@@ -20,7 +20,7 @@
       </td>
     </tr>
   </tbody>
-  <div *ngIf="products.length != 0">
+  <div class="row" *ngIf="products.length != 0">
     <div class="col-6">  <b>Total</b> : R {{total}}</div>
     <div><button  type="button" (click)="addInvoice()">Create Invoice</button></div>
   
