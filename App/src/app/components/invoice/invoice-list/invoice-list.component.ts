@@ -32,7 +32,7 @@ export class InvoiceListComponent implements OnInit {
         name: '',
         surname: '',
         email: '',
-        role: 0
+        role: "0"
 
       },
       userId : 0,

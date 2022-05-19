@@ -27,7 +27,7 @@ export class UserListComponent implements OnInit {
       name: '',
       surname: '',
       email: '',
-      role: 0};
+      role: "0"};
     
       @Input() modalTittle: string = '';
   ngOnInit(): void {

@@ -12,7 +12,7 @@ import { Product, ProductsService } from 'src/app/services/product/product.servi
 export class ProductListComponent implements OnInit {
 
   cartProductList :Product[] = [];
-  total = 0;
+  @Output() total = 0;
   products: Product[] = [];
   selectedProduct!: Product;
   closeResult = '';
@@ -27,7 +27,7 @@ export class ProductListComponent implements OnInit {
     @Input() productData: Product = { id: 0,
       name: '',
       price: 0,
-      quantity: 0,
+      quantity: 1,
       stock: 0};
     
       @Input() modalTittle: string = '';
@@ -120,15 +120,29 @@ export class ProductListComponent implements OnInit {
   
     const productExistInInvoice = this.cartProductList.find(({id}) => id === product.id); // find product by name
     if (!productExistInInvoice) {
+      product.quantity = 1;
       this.cartProductList.push(product); // enhance "porduct" opject with "num" property
+      this.total += product.price;
+      
       return;
     }else{
       let index = this.cartProductList.indexOf(productExistInInvoice);
       this.cartProductList[index].quantity++;
+      this.total += this.cartProductList[index].price;
     }
   }
 
-  removeProduct(product: { name: any; }) {
-    this.cartProductList = this.cartProductList.filter(({name}) => name !== product.name)
+  removeProduct(product: Product) {
+    const productExistInInvoice = this.cartProductList.find(({id}) => id === product.id);
+      if(productExistInInvoice){
+          if(productExistInInvoice.quantity > 1){
+            let index = this.cartProductList.indexOf(productExistInInvoice);
+            this.cartProductList[index].quantity--;
+            
+          }else{
+            this.cartProductList = this.cartProductList.filter(({id}) => id !== product.id);
+          }
+      }
+
    }
 }
